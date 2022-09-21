@@ -36,7 +36,7 @@ const ContactList = () => {
       ) : (
         <LoaderContainer>
           {isLoading ? (
-            <FadeLoader color="rgba(77, 52, 220, 1)" />
+            <FadeLoader color="rgb(0, 0, 0)" />
           ) : (
             <Notification message="No contacts" />
           )}
