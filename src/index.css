@@ -18,3 +18,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input {
+  outline: none;
+  background-color: #fff;
+}
+
+button:hover {
+  box-shadow: 2px 3px 5px rgb(11, 102, 187);
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
