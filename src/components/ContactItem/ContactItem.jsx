@@ -1,10 +1,11 @@
 import { Item, Contact, Button, ContactSpan } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'redux/contactsApi';
+import { RotatingLines } from 'react-loader-spinner';
 import toast from 'react-hot-toast';
 
 const ContactItem = ({ id, name, phone }) => {
-  const [deleteContact] = useDeleteContactMutation();
+  const [deleteContact, {isLoading}] = useDeleteContactMutation();
 
   const handleDeleteContact = async id => {
     await deleteContact(id).unwrap();
@@ -21,11 +22,21 @@ const ContactItem = ({ id, name, phone }) => {
       </Contact>
       <Button
         type="submit"
+        disabled={isLoading}
         onClick={() => {
           handleDeleteContact(id);
         }}
       >
-        Delete
+        {isLoading && (
+          <RotatingLines
+            strokeColor="white"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="18"
+            visible={true}
+          />
+        )}
+        {isLoading ? 'Deleting...' : 'Delete'}
       </Button>
     </Item>
   );

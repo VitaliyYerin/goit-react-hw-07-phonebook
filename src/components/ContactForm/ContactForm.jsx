@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import {
   Button,
   Form,
@@ -12,7 +13,7 @@ import toast from 'react-hot-toast';
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [addContact] = useAddContactMutation();
+  const [addContact, { isLoading }] = useAddContactMutation();
   const { data } = useGetContactsQuery();
 
   const handleChange = event => {
@@ -53,7 +54,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Form onSubmit={handleAddContact}>
+    <Form onSubmit={handleAddContact} isLoading={isLoading}>
       <Label>
         Name
         <InputName
@@ -80,7 +81,18 @@ const ContactForm = () => {
           required
         />
       </Label>
-      <Button type="submit">Add Contact</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading && (
+          <RotatingLines
+            strokeColor="white"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="18"
+            visible={true}
+          />
+        )}
+        {isLoading ? 'Adding...' : 'Add contact'}
+      </Button>
     </Form>
   );
 };
